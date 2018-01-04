@@ -1,0 +1,33 @@
+{
+    "name": "mindy/menu",
+    "type": "library",
+    "license": "MIT",
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "authors": [
+        {
+            "name": "Falaleev Maxim",
+            "email": "max@studio107.ru"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mindy\\Menu\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mindy\\Menu\\Tests\\": ""
+        }
+    }
+}
