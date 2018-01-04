@@ -23,9 +23,27 @@ class MenuNode implements MenuNodeInterface
      */
     protected $url;
     /**
-     * @var MenuNodeInterface
+     * @var MenuNodeInterface[]
      */
-    protected $parent;
+    protected $children = [];
+
+    /**
+     * MenuNode constructor.
+     *
+     * @param array $properties
+     */
+    public function __construct(array $properties = [])
+    {
+        if (array_key_exists('name', $properties)) {
+            $this->setName($properties['name']);
+        }
+        if (array_key_exists('url', $properties)) {
+            $this->setUrl($properties['url']);
+        }
+        if (array_key_exists('children', $properties)) {
+            $this->setChildren($properties['children']);
+        }
+    }
 
     /**
      * @param string $name
@@ -60,19 +78,21 @@ class MenuNode implements MenuNodeInterface
     }
 
     /**
-     * @param MenuNodeInterface $menuNode
+     * @param MenuNodeInterface[] $nodes
      */
-    public function setParent(MenuNodeInterface $menuNode)
+    public function setChildren(array $nodes)
     {
-        $this->parent = $menuNode;
+        foreach ($nodes as $node) {
+            $this->children[] = is_array($node) ? new MenuNode($node) : $node;
+        }
     }
 
     /**
-     * @return MenuNodeInterface
+     * @return MenuNodeInterface[]
      */
-    public function getParent()
+    public function getChildren(): array
     {
-        return $this->parent;
+        return $this->children;
     }
 
     /**
@@ -83,7 +103,9 @@ class MenuNode implements MenuNodeInterface
         return [
             'name' => $this->name,
             'url' => $this->url,
-            'parent' => $this->parent ? $this->parent->toArray() : null
+            'children' => array_map(function (MenuNodeInterface $node) {
+                return $node->toArray();
+            }, $this->children),
         ];
     }
 }

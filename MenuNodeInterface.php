@@ -22,9 +22,9 @@ interface MenuNodeInterface
     public function getUrl();
 
     /**
-     * @return MenuNodeInterface|null
+     * @return MenuNodeInterface[]
      */
-    public function getParent();
+    public function getChildren(): array;
 
     /**
      * @return array
