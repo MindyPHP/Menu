@@ -83,8 +83,18 @@ class MenuNode implements MenuNodeInterface
     public function setChildren(array $nodes)
     {
         foreach ($nodes as $node) {
-            $this->children[] = is_array($node) ? new MenuNode($node) : $node;
+            $this->children[] = is_array($node) ? $this->createMenuNode($node) : $node;
         }
+    }
+
+    /**
+     * @param array $node
+     *
+     * @return MenuNode
+     */
+    public function createMenuNode(array $node)
+    {
+        return new self($node);
     }
 
     /**
