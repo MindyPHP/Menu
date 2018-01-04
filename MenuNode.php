@@ -101,8 +101,8 @@ class MenuNode implements MenuNodeInterface
     public function toArray(): array
     {
         return [
-            'name' => $this->name,
-            'url' => $this->url,
+            'name' => $this->getName(),
+            'url' => $this->getUrl(),
             'children' => array_map(function (MenuNodeInterface $node) {
                 return $node->toArray();
             }, $this->children),
